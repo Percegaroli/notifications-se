@@ -11,7 +11,7 @@
 
 - [Baixar a ultima LTS](https://nodejs.org/en/)
 
-### Executando (como desenvolvedor):
+## Executando (como desenvolvedor):
 
 - Abrir a pasta native em um terminal e executar o comando:
 
