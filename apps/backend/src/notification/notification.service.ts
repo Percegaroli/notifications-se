@@ -10,17 +10,33 @@ export class NotificationService {
     private notificationRepository: Repository<Notification>,
   ) {}
 
-  getNotifications() {
-    return 'AEEE PORRA!';
-  }
+  getNotificationsByEmail = async (email: string) => {
+    const notifications = await this.notificationRepository.find({
+      where: {
+        email,
+        readAt: undefined,
+      },
+      take: 4,
+    });
+    if (notifications.length) {
+      const readDate = new Date();
+      this.notificationRepository.save(
+        notifications.map((notification) => {
+          notification.readAt = readDate;
+          return notification;
+        }),
+      );
+    }
+    return notifications;
+  };
 
-  createNotification(){
+  createNotification() {
     return this.notificationRepository.save({
       message: 'aee porra salvei caralho',
       title: 'titulo',
       createdAt: new Date(),
       userId: 'aeehoo',
-      readAt: new Date()
-    })
+      readAt: new Date(),
+    });
   }
 }
