@@ -27,6 +27,6 @@ npm start
 
 - Abrir o aplicativo Expo Go no celular e scannear o QR Code que apareceu no terminal após o comando anterior. O terminal deve continuar aberto enquanto a aplicação estiver sendo executada
 
-### Funcionamento
+## Funcionamento
 
 Ao inserir um email e apertar em conectar, o aplicativo ficará ouvindo em segundo plano por novas notificações que chegaram na api, e caso chegue exibirá uma notificação para o usuário
