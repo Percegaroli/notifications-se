@@ -1,4 +1,5 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Inject } from '@nestjs/common';
+import { ClientProxy } from '@nestjs/microservices';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Notification } from './notification.entity';
@@ -8,15 +9,16 @@ export class NotificationService {
   constructor(
     @InjectRepository(Notification)
     private notificationRepository: Repository<Notification>,
+    @Inject('NOTIFICATION_SERVICE') private client: ClientProxy
   ) {}
 
-  getNotifications() {
-    return 'AEEE PORRA!';
+  async getNotifications() {
+    return this.client.send({cmd: 'teste-fila'}, 'Hello World Fila');
   }
 
   createNotification(){
     return this.notificationRepository.save({
-      message: 'aee porra salvei caralho',
+      message: 'Mensagem',
       title: 'titulo',
       createdAt: new Date(),
       userId: 'aeehoo',
