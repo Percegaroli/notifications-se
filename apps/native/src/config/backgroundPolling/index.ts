@@ -10,25 +10,57 @@ import { UserSingleton } from "../../singletons/UserSingleton";
 
 const LISTEN_TO_NOTIFICATIONS_TASK_NAME = "listen_to_notifications_task_name";
 
+/*
 defineTask(LISTEN_TO_NOTIFICATIONS_TASK_NAME, async () => {
   try {
+    console.log("fazendo requisição");
+    console.log(UserSingleton.getInstance().getEmail());
     const notificationsResponse = await getNotifications(
       UserSingleton.getInstance().getEmail()
     );
+    console.log(notificationsResponse.data);
     if (notificationsResponse.data.length) {
-      //Mapear os dados da notificação para exibir
-      await scheduleNotificationAsync({
-        content: {
-          title: "Exemplo de título",
-          body: "Exemplo de corpo",
-        },
-        trigger: { seconds: 1 },
-      });
+      await Promise.allSettled(
+        notificationsResponse.data.map(({ message, title }) => {
+          return scheduleNotificationAsync({
+            content: {
+              title: title,
+              body: message,
+            },
+            trigger: { seconds: 1 },
+          });
+        })
+      );
     }
     return BackgroundFetchResult.NewData;
   } catch {
     return BackgroundFetchResult.Failed;
   }
+});
+*/
+
+defineTask(LISTEN_TO_NOTIFICATIONS_TASK_NAME, () => {
+  console.log("fazendo requisição");
+  console.log(UserSingleton.getInstance().getEmail());
+  getNotifications(UserSingleton.getInstance().getEmail())
+    .then((notificationsResponse) => {
+      console.log(notificationsResponse.data);
+      if (notificationsResponse.data.length) {
+        Promise.allSettled(
+          notificationsResponse.data.map(({ message, title }) => {
+            return scheduleNotificationAsync({
+              content: {
+                title: title,
+                body: message,
+              },
+              trigger: { seconds: 1 },
+            });
+          })
+        );
+      }
+    })
+    .then(() => BackgroundFetchResult.NewData)
+    .catch(() => BackgroundFetchResult.Failed);
 });
 
 export const registerBackgroundFetch = () =>

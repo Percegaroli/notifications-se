@@ -1,8 +1,12 @@
 import { notificationsAPI } from "../../../config/notificationsAPI";
 
 interface NotificationDTO {
+  id: string;
+  userEmail: string;
+  createdAt: Date;
+  readAt: Date;
   title: string;
-  body: string;
+  message: string;
 }
 
 export const getNotifications = (email: string) =>

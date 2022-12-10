@@ -14,6 +14,7 @@ export class NotificationService {
   ) {}
 
   async getNotificationsByUserEmail(email: string) {
+    console.log(`nova requisição de ${email}`);
     const notifications = await this.notificationRepository.find({
       where: {
         userEmail: email,
