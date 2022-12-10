@@ -14,11 +14,13 @@ export class NotificationService {
   ) {}
 
   async getNotificationsByUserEmail(email: string) {
+    console.log(`nova requisição de ${email}`);
     const notifications = await this.notificationRepository.find({
       where: {
         userEmail: email,
         readAt: IsNull(),
       },
+      take: 4,
     });
     const readDate = new Date();
     const updatedNotifications = notifications.map((notification) => {

@@ -8,7 +8,7 @@ export class NotificationController {
   constructor(private readonly notificationService: NotificationService) {}
 
   @Get(':email')
-  getHello(@Param('email') email: string) {
+  getNotifications(@Param('email') email: string) {
     return this.notificationService.getNotificationsByUserEmail(email);
   }
 
