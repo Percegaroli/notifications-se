@@ -1,7 +1,7 @@
 import { Controller, Get, Post } from '@nestjs/common';
 import { NotificationService } from './notification.service';
 
-@Controller({path: 'notifications'})
+@Controller({ path: 'notifications' })
 export class NotificationController {
   constructor(private readonly notificationService: NotificationService) {}
 

@@ -9,20 +9,20 @@ export class NotificationService {
   constructor(
     @InjectRepository(Notification)
     private notificationRepository: Repository<Notification>,
-    @Inject('NOTIFICATION_SERVICE') private client: ClientProxy
+    @Inject('NOTIFICATION_SERVICE') private client: ClientProxy,
   ) {}
 
   async getNotifications() {
-    return this.client.emit({cmd: 'teste-fila'}, 'Hello World Fila');
+    return this.client.emit({ cmd: 'teste-fila' }, 'Hello World Fila');
   }
 
-  createNotification(){
+  createNotification() {
     return this.notificationRepository.save({
       message: 'Mensagem',
       title: 'titulo',
       createdAt: new Date(),
       userId: 'aeehoo',
-      readAt: new Date()
-    })
+      readAt: new Date(),
+    });
   }
 }
