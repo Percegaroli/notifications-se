@@ -6,12 +6,12 @@ export class Notification {
   id: string;
 
   @Column()
-  email: string;
+  userEmail: string;
 
   @Column()
   createdAt: Date;
 
-  @Column()
+  @Column({ nullable: true })
   readAt?: Date;
 
   @Column()
