@@ -13,7 +13,7 @@ export class NotificationService {
   ) {}
 
   async getNotifications() {
-    return this.client.send({cmd: 'teste-fila'}, 'Hello World Fila');
+    return this.client.emit({cmd: 'teste-fila'}, 'Hello World Fila');
   }
 
   createNotification(){
