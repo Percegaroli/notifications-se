@@ -12,8 +12,8 @@ export class NotificationService {
     @Inject('NOTIFICATION_SERVICE') private client: ClientProxy,
   ) {}
 
-  async getNotifications() {
-    return this.client.emit({ cmd: 'teste-fila' }, 'Hello World Fila');
+  getNotifications() {
+    return this.client.emit('newNotification', 'Hello World Fila');
   }
 
   createNotification() {
