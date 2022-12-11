@@ -3,6 +3,7 @@ import { ClientProxy } from '@nestjs/microservices';
 import { InjectRepository } from '@nestjs/typeorm';
 import { IsNull, Repository } from 'typeorm';
 import { CreateNotificationDTO } from './dtos/CreateNotificationDTO';
+import { GetNotificationDTO } from './dtos/GetNotificatioDTO';
 import { Notification } from './notification.entity';
 
 @Injectable()
@@ -13,7 +14,9 @@ export class NotificationService {
     @Inject('NOTIFICATION_SERVICE') private client: ClientProxy,
   ) {}
 
-  async getNotificationsByUserEmail(email: string) {
+  async getNotificationsByUserEmail(
+    email: string,
+  ): Promise<Array<GetNotificationDTO>> {
     console.log(`nova requisição de ${email}`);
     const notifications = await this.notificationRepository.find({
       where: {
