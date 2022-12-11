@@ -33,7 +33,7 @@ const Home = () => {
     <View style={styles.container}>
       <StatusBar style="auto" />
       <View>
-        <Text>Email:</Text>
+        <Text style={styles.label}>Email:</Text>
         <TextInput
           onChangeText={onChangeEmail}
           editable={!isRegistered}
