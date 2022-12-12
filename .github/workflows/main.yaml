@@ -9,5 +9,5 @@ jobs:
       run: yarn
     - name: Run tests
       run: yarn test
-        with:
-          jestArgs: apps/backend/test/*.spec.js
+      with:
+        jestArgs: apps/backend/test/*.spec.js
